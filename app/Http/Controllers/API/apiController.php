@@ -115,6 +115,30 @@ class apiController extends Controller
     public function update(Request $request, $id)
     {
         
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'age' => 'required',
+            'country' => 'required',
+        ]);
+
+        if ($validator->fails()) 
+        {   
+            return ["response"=>$validator->messages(), "success"=>false] ;              
+        }
+        else
+        {
+            $updatInfo = info::find($id);
+            $updatInfo->name = $request->input('name');
+            $updatInfo->age = $request->input('age');
+            $updatInfo->country = $request->input('country');
+            $updatInfo->update();
+
+            return [
+                "data"=>$updatInfo ,
+                "message"=> "successfully updated", 
+                "success"=> true ,
+            ];     
+        }
     }
 
     /**
