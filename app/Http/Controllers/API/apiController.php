@@ -76,7 +76,22 @@ class apiController extends Controller
      */
     public function show($id)
     {
-        //
+        $showInfo = info::find($id);
+        if($showInfo != null)
+        {
+            return[
+                "data"=>$showInfo,
+                "message"=>"Finded",
+                "seccess"=>true
+            ];
+        }
+        else
+        {
+            return[
+                "massage"=>"Not found",
+                "seccess"=>false
+            ];
+        }
     }
 
     /**
@@ -116,7 +131,7 @@ class apiController extends Controller
         {
             $deletInfo->delete();
             return[
-                "info"=>$deletInfo ,
+                "data"=>$deletInfo ,
                 "message"=> "success deleted", 
                 "success"=> true ,
             ];
