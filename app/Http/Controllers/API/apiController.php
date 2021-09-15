@@ -56,18 +56,16 @@ class apiController extends Controller
         else
         { 
             $a = new info();
-
             $a->name = $request->input('name');
             $a->age = $request->input('age');
             $a->country = $request->input('country');
-
             $a->save();
+
             return [
                 "info"=>$a ,
                 "success"=> true ,
-                ];     
+            ];     
         }
-
     }
 
     /**
@@ -112,6 +110,24 @@ class apiController extends Controller
      */
     public function destroy($id)
     {
+        $deletInfo = info::find($id);
+        
+        if($deletInfo != null)
+        {
+            $deletInfo->delete();
+            return[
+                "info"=>$deletInfo ,
+                "message"=> "success deleted", 
+                "success"=> true ,
+            ];
+        }
+        else
+        {
+            return[
+                    "message"=>"Not found the ID",
+                    "seccess"=>false,
+            ];
+        }
         
     }
 }
