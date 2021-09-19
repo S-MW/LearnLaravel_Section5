@@ -19,7 +19,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+/*
+    laravel resource controller 
+    - you have to add (api) before any route like the example shown below.
+    http://127.0.0.1:8000/api/ApiTest
 
+
+
+ */
 Route::resource('ApiTest', apiController::class);
 
 Route::get('test', [apiController::class,'test']);
